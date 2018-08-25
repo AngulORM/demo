@@ -1,0 +1,3 @@
+[submodule "projects/angulorm"]
+	path = projects/angulorm
+	url = https://github.com/AngulORM/angulorm.git
