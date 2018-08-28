@@ -1,6 +1,7 @@
-import { Entity } from 'projects/angular-rest/src/lib/decorators/model.decorator';
+import {Entity} from '../../projects/angulorm/src/lib/decorators/entity.decorator';
+import {RestEntityDescriptor} from '../../projects/angulorm/src/lib/domain/descriptors';
 
-@Entity({
+@Entity<RestEntityDescriptor>({
     class: SecondEntity,
     name: 'Second',
     route: '/secondurl'

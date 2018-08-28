@@ -1,10 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { AngularRestModule } from 'projects/angular-rest/src/public_api';
-import { TestEntity } from '../entities/test.entity';
-import { ENTITIES } from '../entities/entities';
+import {AppComponent} from './app.component';
+import {AngularRestModule} from '../../projects/angulorm/src/public_api';
 
 @NgModule({
   declarations: [
@@ -18,7 +16,6 @@ import { ENTITIES } from '../entities/entities';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-
   constructor() {
   }
 }
