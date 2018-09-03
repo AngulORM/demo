@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {TestEntity} from '../entities/test.entity';
+import {SecondEntity} from '../entities/second.entity';
+import {AngularRestModule} from '../../projects/angulorm/src/lib/angular-rest.module';
 
 @Component({
   selector: 'ard-root',
@@ -7,10 +9,16 @@ import {TestEntity} from '../entities/test.entity';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-rest-demo';
+  title = 'AngulORM demo';
+
+  entities = AngularRestModule.entities;
 
   constructor() {
     const entity = new TestEntity();
-    console.log(entity);
+    const entity2 = new SecondEntity();
+
+    setInterval(() => {
+      this.entities = AngularRestModule.entities;
+    }, 100);
   }
 }
