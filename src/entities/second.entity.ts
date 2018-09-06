@@ -1,6 +1,6 @@
 import {Entity} from '../../projects/angulorm/src/lib/decorators/entity.decorator';
-import {RestEntityDescriptor} from '../../projects/angulorm/src/lib/domain/descriptors';
+import {IndexedDBEntityDescriptor} from '../descriptors/indexedDB-entity.descriptor';
 
-@Entity<RestEntityDescriptor>(new RestEntityDescriptor('Second', '/secondurl'))
+@Entity<IndexedDBEntityDescriptor>(new IndexedDBEntityDescriptor('Second', 'AngulORM-demo', 'Second'))
 export class SecondEntity {
 }

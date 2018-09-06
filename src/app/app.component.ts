@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TestEntity} from '../entities/test.entity';
 import {SecondEntity} from '../entities/second.entity';
 import {AngularRestModule} from '../../projects/angulorm/src/lib/angular-rest.module';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'ard-root',
@@ -12,6 +13,7 @@ export class AppComponent implements OnInit {
   title = 'AngulORM demo';
 
   entities = AngularRestModule.entities;
+  testEntities: Observable<TestEntity[]>;
 
   constructor() {
     const entity2 = new SecondEntity();
@@ -22,6 +24,10 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const entity = await TestEntity.read(1).toPromise();
+    const entity = new TestEntity();
+    entity.title = 'Hello world';
+    entity.save();
+
+    this.testEntities = <Observable<TestEntity[]>>TestEntity.readAll();
   }
 }

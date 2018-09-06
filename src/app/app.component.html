@@ -12,3 +12,10 @@
   </li>
 </ul>
 
+<h2>Test entities: </h2>
+<ul>
+  <li *ngFor="let entity of testEntities | async">
+    {{ entity.id }} - {{ entity.title }}
+  </li>
+</ul>
+
