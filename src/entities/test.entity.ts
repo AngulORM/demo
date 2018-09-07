@@ -4,7 +4,7 @@ import {IndexedDBEntityDescriptor} from '../descriptors/indexedDB-entity.descrip
 
 @Entity<IndexedDBEntityDescriptor>(new IndexedDBEntityDescriptor('Test', 'AngulORM-demo', 'Test'))
 export class TestEntity extends AbstractRestEntity {
-  constructor(public title: string) {
+  constructor(public title: string = null) {
     super();
   }
 }
