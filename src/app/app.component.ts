@@ -3,6 +3,7 @@ import {TestEntity} from '../entities/test.entity';
 import {SecondEntity} from '../entities/second.entity';
 import {AngularRestModule} from '../../projects/angulorm/src/lib/angular-rest.module';
 import {Observable} from 'rxjs';
+import {AbstractEntity} from '../../projects/angulorm/src/lib/domain/entities';
 
 @Component({
   selector: 'ard-root',
@@ -20,7 +21,7 @@ export class AppComponent implements OnInit {
 
     setInterval(() => {
       this.entities = AngularRestModule.entities;
-    }, 100);
+    }, 3000);
   }
 
   async ngOnInit() {
@@ -29,5 +30,14 @@ export class AppComponent implements OnInit {
     entity.save();
 
     this.testEntities = <Observable<TestEntity[]>>TestEntity.readAll();
+    this.testEntities.subscribe(entities => console.log(entities));
+  }
+
+  delete(entity: AbstractEntity) {
+    entity.delete().then(() => {
+      console.log('Deleted');
+    }).catch(() => {
+      console.log('An error occured');
+    });
   }
 }

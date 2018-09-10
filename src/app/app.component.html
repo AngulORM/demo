@@ -16,6 +16,7 @@
 <ul>
   <li *ngFor="let entity of testEntities | async">
     {{ entity.id }} - {{ entity.title }}
+    <button (click)="delete(entity)">Delete</button>
   </li>
 </ul>
 

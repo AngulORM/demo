@@ -5,7 +5,6 @@ import {IndexedDBEntityDescriptor} from '../../descriptors/indexedDB-entity.desc
 export class IndexedDBEntityService<T extends AbstractEntity> implements IEntityService<T> {
   private static databases: Map<string, IDBDatabase> = new Map<string, IDBDatabase>();
   private static upgradesNeeded: Map<string, boolean> = new Map<string, boolean>();
-  private static objectStores: Map<string, IDBObjectStore> = new Map<string, IDBObjectStore>();
 
   constructor(private entityDescriptor: IndexedDBEntityDescriptor) {
 
@@ -69,7 +68,7 @@ export class IndexedDBEntityService<T extends AbstractEntity> implements IEntity
     return new Promise(async (resolve, reject) => {
       entity.id = Math.round(Math.random() * 5000);
       const store = await this.getObjectStore();
-      const request = store.add(entity);
+      const request = store.put(entity);
       request.onerror = (event) => {
         reject('Can\'t create');
       };
@@ -82,8 +81,7 @@ export class IndexedDBEntityService<T extends AbstractEntity> implements IEntity
   public async update(entity: T): Promise<any> {
     return new Promise(async (resolve, reject) => {
       const store = await this.getObjectStore();
-      store.put(entity);
-      const request = store.add(entity);
+      const request = store.put(entity);
       request.onerror = (event) => {
         reject('Can\'t update');
       };
@@ -94,30 +92,29 @@ export class IndexedDBEntityService<T extends AbstractEntity> implements IEntity
   }
 
   public async delete(id: number): Promise<any> {
-
+    return new Promise(async (resolve, reject) => {
+      const store = await this.getObjectStore();
+      const request = store.delete(id);
+      request.onerror = (event) => {
+        reject('Can\'t delete');
+      };
+      request.onsuccess = (event) => {
+        resolve();
+      };
+    });
   }
 
   private async getObjectStore(): Promise<IDBObjectStore> {
-    if (IndexedDBEntityService.objectStores.has(`${this.entityDescriptor.database}_${this.entityDescriptor.table}`)) {
-      return IndexedDBEntityService.objectStores.get(`${this.entityDescriptor.database}_${this.entityDescriptor.table}`);
-    }
-
     return new Promise<IDBObjectStore>(async (resolve) => {
       const database = await IndexedDBEntityService.getDatabase(this.entityDescriptor.database);
 
       if (IndexedDBEntityService.upgradesNeeded.get(this.entityDescriptor.database)) {
         const store = database.createObjectStore(this.entityDescriptor.table, {keyPath: 'id', autoIncrement: true});
         store.transaction.oncomplete = () => {
-          IndexedDBEntityService.objectStores.set(
-            `${this.entityDescriptor.database}_${this.entityDescriptor.table}`,
-            database.transaction(this.entityDescriptor.table, 'readwrite').objectStore(this.entityDescriptor.table));
-          resolve(IndexedDBEntityService.objectStores.get(`${this.entityDescriptor.database}_${this.entityDescriptor.table}`));
+          resolve(database.transaction(this.entityDescriptor.table, 'readwrite').objectStore(this.entityDescriptor.table));
         };
       } else {
-        IndexedDBEntityService.objectStores.set(
-          `${this.entityDescriptor.database}_${this.entityDescriptor.table}`,
-          database.transaction(this.entityDescriptor.table, 'readwrite').objectStore(this.entityDescriptor.table));
-        resolve(IndexedDBEntityService.objectStores.get(`${this.entityDescriptor.database}_${this.entityDescriptor.table}`));
+        resolve(database.transaction(this.entityDescriptor.table, 'readwrite').objectStore(this.entityDescriptor.table));
       }
     });
   }
