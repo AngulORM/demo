@@ -20,3 +20,9 @@
   </li>
 </ul>
 
+<h2>Breweries: </h2>
+<ul>
+  <li *ngFor="let brewery of breweries | async">
+    {{ brewery.name }} - {{ brewery.city }}, {{ brewery.country }}
+  </li>
+</ul>

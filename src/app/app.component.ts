@@ -4,6 +4,7 @@ import {SecondEntity} from '../entities/second.entity';
 import {AngularRestModule} from '../../projects/angulorm/src/lib/angular-rest.module';
 import {Observable} from 'rxjs';
 import {AbstractEntity} from '../../projects/angulorm/src/lib/domain/entities';
+import {BreweryEntity} from '../entities/brewery.entity';
 
 @Component({
   selector: 'ard-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit {
 
   entities = AngularRestModule.entities;
   testEntities: Observable<TestEntity[]>;
+  breweries: Observable<BreweryEntity[]> = <Observable<BreweryEntity[]>>BreweryEntity.readAll();
 
   constructor() {
     const entity2 = new SecondEntity();
