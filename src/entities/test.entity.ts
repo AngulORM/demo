@@ -7,4 +7,8 @@ export class TestEntity extends AbstractRestEntity {
   constructor(public title: string = null) {
     super();
   }
+
+  toString(): string {
+    return `${this.id} - ${this.title}`;
+  }
 }
