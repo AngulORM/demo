@@ -5,7 +5,6 @@ import {AngularRestModule} from '../../projects/angulorm/src/lib/angular-rest.mo
 import {Observable} from 'rxjs';
 import {AbstractEntity} from '../../projects/angulorm/src/lib/domain/entities';
 import {BreweryEntity} from '../entities/brewery.entity';
-import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'ard-root',
@@ -30,9 +29,7 @@ export class AppComponent implements OnInit {
   async ngOnInit() {
     const entity = new TestEntity();
     entity.title = 'Hello world';
-    entity.save()
-      .then(async (observable: Observable<TestEntity>) => console.log('Created : ' + (await observable.pipe(take(1)).toPromise()).toString()))
-      .catch(error => console.log('An error occured', error));
+    entity.save();
 
     this.testEntities = <Observable<TestEntity[]>>TestEntity.readAll();
     this.testEntities.subscribe(entities => console.log('Number of TestEntities : ' + entities.length));
