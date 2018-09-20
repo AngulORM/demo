@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {AngularRestModule} from '../../projects/angulorm/src/public_api';
-import {DashboardComponent, NavbarComponent} from './components';
+import {BreweriesComponent, DashboardComponent, NavbarComponent} from './components';
 import {LayoutModule} from '@angular/cdk/layout';
 import {MatButtonModule, MatCardModule, MatChipsModule, MatGridListModule, MatIconModule, MatListModule, MatMenuModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -12,7 +12,8 @@ import {RouterModule, Routes} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 
 const routes: Routes = [
-  {path: '', component: DashboardComponent}
+  {path: '', component: DashboardComponent},
+  {path: 'breweries', component: BreweriesComponent},
 ];
 
 
@@ -20,7 +21,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     NavbarComponent,
-    DashboardComponent
+    DashboardComponent,
+    BreweriesComponent
   ],
   imports: [
     BrowserModule,
