@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AngularRestModule} from '../../../../projects/angulorm/src/lib/angular-rest.module';
 import {Observable} from 'rxjs';
-import {TestEntity} from '../../../entities/test.entity';
+import {TestEntity} from '../../entities/test.entity';
+import {BreweryEntity} from '../../entities/brewery.entity';
 
 @Component({
   selector: 'ard-dashboard',
@@ -23,6 +24,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.intervalId = setInterval(() => {
       this.entities = AngularRestModule.entities;
     }, 1000);
+
+    BreweryEntity.search(new Map<string, string>([['name', 'dog']])).subscribe(breweries => console.log(breweries));
   }
 
   ngOnDestroy() {

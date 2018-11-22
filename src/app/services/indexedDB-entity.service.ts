@@ -1,6 +1,6 @@
 import {IEntityService} from '../../../projects/angulorm/src/lib/services';
 import {AbstractEntity} from '../../../projects/angulorm/src/lib/domain/entities';
-import {IndexedDBEntityDescriptor} from '../../descriptors/indexedDB-entity.descriptor';
+import {IndexedDBEntityDescriptor} from '../descriptors';
 
 export class IndexedDBEntityService<T extends AbstractEntity> implements IEntityService<T> {
   private static databases: Map<string, IDBDatabase> = new Map<string, IDBDatabase>();
