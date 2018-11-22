@@ -9,8 +9,8 @@
         <mat-card-content class="dashboard-card-content">
           <mat-list>
             <mat-list-item *ngFor="let entity of entities">
-              {{ entity.name }} ({{ entity.class.entityManager.entities.size }})
-              <mat-chip></mat-chip>
+              {{ entity.name }}
+              <mat-chip>{{ entity.class.count | async }}</mat-chip>
             </mat-list-item>
           </mat-list>
         </mat-card-content>
