@@ -10,7 +10,7 @@
           <mat-list>
             <mat-list-item *ngFor="let entity of entities">
               {{ entity.name }}
-              <mat-chip>{{ entity.class.count | async }}</mat-chip>
+              <mat-chip>{{ entity.class.count | async }} entities</mat-chip>
             </mat-list-item>
           </mat-list>
         </mat-card-content>

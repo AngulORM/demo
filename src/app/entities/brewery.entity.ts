@@ -3,45 +3,44 @@ import {ExtendedRestEntityDescriptor} from '../descriptors';
 import {AbstractExtendedRestEntity} from './abstract-extended-rest.entity';
 import {Observable} from 'rxjs';
 import {AbstractRestEntity} from '../../../projects/angulorm/src/lib/domain/entities';
-import {PropertyDescriptor} from '../../../projects/angulorm/src/lib/domain/descriptors';
 import {environment} from '../../environments/environment';
 
 @Entity(new ExtendedRestEntityDescriptor('Brewery', environment.breweriesAPIUrl))
 export class BreweryEntity extends AbstractExtendedRestEntity {
-  @EntityProperty(new PropertyDescriptor(String))
+  @EntityProperty({type: String})
   public name: string;
 
-  @EntityProperty(new PropertyDescriptor(String))
+  @EntityProperty({type: String})
   public brewery_type: string;
 
-  @EntityProperty(new PropertyDescriptor(String))
+  @EntityProperty({type: String})
   public street: string;
 
-  @EntityProperty(new PropertyDescriptor(String))
+  @EntityProperty({type: String})
   public city: string;
 
-  @EntityProperty(new PropertyDescriptor(String))
+  @EntityProperty({type: String})
   public state: string;
 
-  @EntityProperty(new PropertyDescriptor(String))
+  @EntityProperty({type: String})
   public postal_code: string;
 
-  @EntityProperty(new PropertyDescriptor(String))
+  @EntityProperty({type: String})
   public country: string;
 
-  @EntityProperty(new PropertyDescriptor(String))
+  @EntityProperty({type: String})
   public longitude: string;
 
-  @EntityProperty(new PropertyDescriptor(String))
+  @EntityProperty({type: String})
   public latitude: string;
 
-  @EntityProperty(new PropertyDescriptor(String))
+  @EntityProperty({type: String})
   public phone: string;
 
-  @EntityProperty(new PropertyDescriptor(String))
+  @EntityProperty({type: String})
   public website_url: string;
 
-  @EntityProperty(new PropertyDescriptor(Date))
+  @EntityProperty({type: Date})
   public updated_at: Date;
 
   public static search(filters: Map<string, string>): Observable<AbstractRestEntity[]> {

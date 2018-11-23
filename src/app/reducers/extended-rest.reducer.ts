@@ -24,6 +24,7 @@ export class ExtendedRestReducer<T extends AbstractEntity> extends DumbReducer<T
         break;
       case this.actionsManager.getResponseAction(ExtendedRestReducer.ACTION_SEARCH):
         const entitiesRead = this.read(action);
+        this.setCompleted = false;
         state = this.setEntities(state, entitiesRead);
         state = this.finishTransaction(<ResponseAction>action, state, entitiesRead);
         break;

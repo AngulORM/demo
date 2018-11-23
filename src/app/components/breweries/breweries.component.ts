@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {BreweryEntity} from '../../../entities/brewery.entity';
+import {BreweryEntity} from '../../entities/brewery.entity';
 
 @Component({
   selector: 'ard-breweries',
