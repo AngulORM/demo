@@ -18,11 +18,11 @@
       "dom"
     ],
     "paths": {
-      "angular-rest": [
-        "dist/angular-rest"
+      "ngFluxify": [
+        "dist/ngFluxify"
       ],
-      "angular-rest/*": [
-        "dist/angular-rest/*"
+      "ngFluxify/*": [
+        "dist/ngFluxify/*"
       ]
     }
   }

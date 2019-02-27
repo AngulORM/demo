@@ -1,0 +1,32 @@
+<clr-datagrid>
+  <clr-dg-column>ID</clr-dg-column>
+  <clr-dg-column>Title</clr-dg-column>
+  <clr-dg-column>Creation date</clr-dg-column>
+  <clr-dg-column>Last update</clr-dg-column>
+
+  <clr-dg-row *ngFor="let article of articles | async" [clrDgItem]="article" [routerLink]="['/articles', article.id]">
+    <clr-dg-cell>{{ article.id }}</clr-dg-cell>
+    <clr-dg-cell>{{ article.title }}</clr-dg-cell>
+    <clr-dg-cell>{{ article.createdAt | date }}</clr-dg-cell>
+    <clr-dg-cell>{{ article.updatedAt | date }}</clr-dg-cell>
+
+    <clr-dg-action-overflow (click)="$event.stopPropagation()">
+      <button [routerLink]="['/articles', article.id, 'edit']" class="action-item">Edit</button>
+      <button (click)="onDelete(article)" class="action-item">Delete</button>
+    </clr-dg-action-overflow>
+  </clr-dg-row>
+
+  <clr-dg-footer>{{ (articles | async)?.length }} articles</clr-dg-footer>
+</clr-datagrid>
+
+<clr-modal #deleteModal>
+  <h3 class="modal-title">Delete article</h3>
+  <div class="modal-body">
+    <p>Are you sure you want to delete article <strong>{{ articleToDelete?.title }}</strong>? This action is permenant
+      and cannot be recovered.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="deleteModal.close()">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="onDelete(articleToDelete, true)">Delete</button>
+  </div>
+</clr-modal>

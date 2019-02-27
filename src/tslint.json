@@ -10,7 +10,7 @@
         "component-selector": [
             true,
             "element",
-            "ard",
+          "ngf-demo",
             "kebab-case"
         ]
     }

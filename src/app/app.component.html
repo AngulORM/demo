@@ -1,1 +1,18 @@
-<ard-navbar></ard-navbar>
+<div class="main-container">
+  <header class="header header-6">
+    <div class="branding" routerLink="">
+      <img src="/assets/images/logo.png">
+      <span class="title">ngFluxify demo</span>
+    </div>
+  </header>
+  <nav class="subnav">
+    <ul class="nav">
+      <li *ngFor="let navLink of navLinks" class="nav-item">
+        <a [routerLink]="navLink.routerLink" class="nav-link" routerLinkActive="active">{{ navLink.title }}</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="content-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

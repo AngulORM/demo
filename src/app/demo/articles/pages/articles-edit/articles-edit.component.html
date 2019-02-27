@@ -1,0 +1,40 @@
+<form *ngIf="article" [formGroup]="articleForm" clrForm>
+  <clr-alert (clrAlertClosedChange)="errorMessage = null" *ngIf="errorMessage" [clrAlertType]="'danger'">
+    <clr-alert-item>
+        <span class="alert-text">
+            {{ errorMessage }}
+        </span>
+    </clr-alert-item>
+  </clr-alert>
+
+  <clr-input-container>
+    <label>Title</label>
+    <input clrInput formControlName="title" type="text">
+    <clr-control-helper>Subject of the article in less than 100 characters</clr-control-helper>
+    <clr-control-error>Title shall not be empty or exceed 100 characters</clr-control-error>
+  </clr-input-container>
+  <clr-textarea-container>
+    <label>Content</label>
+    <textarea clrTextarea formControlName="content"></textarea>
+    <clr-control-error>Content shall not be empty</clr-control-error>
+  </clr-textarea-container>
+
+  <div class="clr-row">
+    <div class="clr-col-3 clr-offset-9">
+      <button (click)="submit()" class="btn btn-primary" type="submit">Submit</button>
+      <button (click)="onDelete()" *ngIf="article.id" class="btn btn-danger">Delete</button>
+    </div>
+  </div>
+</form>
+
+<clr-modal *ngIf="article" #deleteModal>
+  <h3 class="modal-title">Delete article</h3>
+  <div class="modal-body">
+    <p>Are you sure you want to delete article <strong>{{ article.title }}</strong>? This action is permenant and cannot
+      be recovered.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="deleteModal.close()">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="onDelete(true)">Delete</button>
+  </div>
+</clr-modal>

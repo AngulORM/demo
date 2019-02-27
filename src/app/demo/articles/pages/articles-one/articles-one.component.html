@@ -1,0 +1,35 @@
+<div *ngIf="(article | async) as article" class="clr-row">
+  <div class="clr-col-12">
+    <div class="card">
+      <div class="card-header">
+        {{ article.title }}
+      </div>
+      <div class="card-block">
+        <div class="card-title">
+          {{ article.createdAt | date }}
+        </div>
+        <div [innerText]="article.content" class="card-text"></div>
+      </div>
+      <div class="card-footer">
+        <button [routerLink]="['/articles', article.id, 'edit']" class="btn btn-sm btn-link">
+          Edit
+        </button>
+        <button (click)="onDelete(article)" class="btn btn-sm btn-danger">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<clr-modal *ngIf="(article | async) as article" #deleteModal>
+  <h3 class="modal-title">Delete article</h3>
+  <div class="modal-body">
+    <p>Are you sure you want to delete article <strong>{{ article?.title }}</strong>? This action is permenant and
+      cannot be recovered.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="deleteModal.close()">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="onDelete(article, true)">Delete</button>
+  </div>
+</clr-modal>
