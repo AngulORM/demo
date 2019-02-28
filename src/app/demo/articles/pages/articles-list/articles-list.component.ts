@@ -1,6 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
-import {ArticleEntity} from '../../../../core/entities';
 import {Observable} from 'rxjs';
+
+import {ArticleEntity} from '../../entities';
 
 @Component({
   selector: 'ngf-demo-page-articles-list',

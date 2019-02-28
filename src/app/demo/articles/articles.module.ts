@@ -15,7 +15,7 @@ import * as Pages from './pages';
     ClarityModule,
     RouterModule.forChild([
       {
-        path: 'articles', component: ArticlesComponent, children: [
+        path: '', component: ArticlesComponent, children: [
           {path: 'all', component: Pages.ArticlesListComponent},
           {path: 'new', component: Pages.ArticlesEditComponent},
           {path: ':id/edit', component: Pages.ArticlesEditComponent},

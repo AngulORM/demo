@@ -10,7 +10,7 @@ import * as Pages from './pages';
     CommonModule,
     RouterModule.forChild([
       {
-        path: 'breweries', component: BreweriesComponent, children: [
+        path: '', component: BreweriesComponent, children: [
           {path: 'new', component: Pages.BreweriesEditComponent},
           {path: ':id/edit', component: Pages.BreweriesEditComponent},
           {path: ':id', component: Pages.BreweriesOneComponent},

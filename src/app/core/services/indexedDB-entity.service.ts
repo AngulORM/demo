@@ -4,7 +4,6 @@ import {IndexedDBEntityDescriptor} from '../descriptors';
 
 export class IndexedDBEntityService<T extends AbstractEntity> implements IEntityService<T> {
   private static databases: Map<string, IDBDatabase> = new Map<string, IDBDatabase>();
-  private static upgradesNeeded: Map<string, boolean> = new Map<string, boolean>();
 
   constructor(private entityDescriptor: IndexedDBEntityDescriptor) {
 
@@ -14,13 +13,18 @@ export class IndexedDBEntityService<T extends AbstractEntity> implements IEntity
     return window.indexedDB;
   }
 
-  private static async getDatabase(name: string): Promise<IDBDatabase> {
-    if (IndexedDBEntityService.databases.has(name)) {
-      return IndexedDBEntityService.databases.get(name);
-    }
-
+  private static getDatabase(name: string, onupgradeneeded: (event) => void, version?: number): Promise<IDBDatabase> {
     return new Promise<IDBDatabase>((resolve, reject) => {
-      const request = IndexedDBEntityService.indexedDB.open(name);
+      if (IndexedDBEntityService.databases.has(name)) {
+        if (version && version > IndexedDBEntityService.databases.get(name).version) {
+          IndexedDBEntityService.databases.get(name).close();
+          IndexedDBEntityService.databases.delete(name);
+        } else {
+          resolve(IndexedDBEntityService.databases.get(name));
+        }
+      }
+
+      const request = IndexedDBEntityService.indexedDB.open(name, version);
       request.onerror = (event) => {
         reject(event);
       };
@@ -30,11 +34,7 @@ export class IndexedDBEntityService<T extends AbstractEntity> implements IEntity
         resolve(IndexedDBEntityService.databases.get(name));
       };
 
-      request.onupgradeneeded = (event) => {
-        IndexedDBEntityService.upgradesNeeded.set(name, true);
-        IndexedDBEntityService.databases.set(name, event.target['result']);
-        resolve(IndexedDBEntityService.databases.get(name));
-      };
+      request.onupgradeneeded = onupgradeneeded;
     });
   }
 
@@ -108,16 +108,17 @@ export class IndexedDBEntityService<T extends AbstractEntity> implements IEntity
 
   private async getObjectStore(): Promise<IDBObjectStore> {
     return new Promise<IDBObjectStore>(async (resolve) => {
-      const database = await IndexedDBEntityService.getDatabase(this.entityDescriptor.database);
+      const createTableStore = (event: IDBVersionChangeEvent) => {
+        event.target['result'].createObjectStore(this.entityDescriptor.table, {keyPath: 'id', autoIncrement: true});
+      };
 
-      if (IndexedDBEntityService.upgradesNeeded.get(this.entityDescriptor.database)) {
-        const store = database.createObjectStore(this.entityDescriptor.table, {keyPath: 'id', autoIncrement: true});
-        store.transaction.oncomplete = () => {
-          resolve(database.transaction(this.entityDescriptor.table, 'readwrite').objectStore(this.entityDescriptor.table));
-        };
-      } else {
-        resolve(database.transaction(this.entityDescriptor.table, 'readwrite').objectStore(this.entityDescriptor.table));
+      let database = await IndexedDBEntityService.getDatabase(this.entityDescriptor.database, createTableStore);
+
+      if (!database.objectStoreNames.contains(this.entityDescriptor.table)) {
+        database = await IndexedDBEntityService.getDatabase(this.entityDescriptor.database, createTableStore, database.version + 1);
       }
+
+      resolve(database.transaction(this.entityDescriptor.table, 'readwrite').objectStore(this.entityDescriptor.table));
     });
   }
 }

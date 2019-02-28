@@ -1,9 +1,10 @@
-import {Entity, EntityProperty} from '../../../../projects/ngFluxify/src/lib/decorators';
-import {ExtendedRestEntityDescriptor} from '../descriptors';
-import {AbstractExtendedRestEntity} from './abstract-extended-rest.entity';
 import {Observable} from 'rxjs';
-import {AbstractRestEntity} from '../../../../projects/ngFluxify/src/lib/domain/entities';
-import {environment} from '../../../environments/environment';
+
+import {AbstractRestEntity} from '../../../../../projects/ngFluxify/src/lib/domain/entities';
+import {environment} from '../../../../environments/environment';
+import {ExtendedRestEntityDescriptor} from '../../../core/descriptors';
+import {AbstractExtendedRestEntity} from '../../../core/entities';
+import {Entity, EntityProperty} from '../../../../../projects/ngFluxify/src/lib/decorators';
 
 @Entity(new ExtendedRestEntityDescriptor('Brewery', environment.breweriesAPIUrl))
 export class BreweryEntity extends AbstractExtendedRestEntity {

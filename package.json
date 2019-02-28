@@ -31,7 +31,9 @@
     "zone.js": "~0.8.26",
     "@clr/ui": "^1.1.0",
     "@clr/icons": "^1.1.0",
-    "@webcomponents/custom-elements": "^1.0.0"
+    "@webcomponents/custom-elements": "^1.0.0",
+    "@angular-redux/form": "^9.0.1",
+    "@angular-redux/store": "^9.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.7.0",

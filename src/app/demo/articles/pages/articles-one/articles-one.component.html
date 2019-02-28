@@ -9,6 +9,10 @@
           {{ article.createdAt | date }}
         </div>
         <div [innerText]="article.content" class="card-text"></div>
+
+        <span *ngFor="let tag of article.tags | async" class="label label-orange">
+          {{ tag.text }}
+        </span>
       </div>
       <div class="card-footer">
         <button [routerLink]="['/articles', article.id, 'edit']" class="btn btn-sm btn-link">

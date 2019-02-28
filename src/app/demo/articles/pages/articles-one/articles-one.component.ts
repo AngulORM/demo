@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ArticleEntity} from '../../../../core/entities';
+
+import {ArticleEntity} from '../../entities';
 
 @Component({
   selector: 'ngf-demo-page-articles-one',

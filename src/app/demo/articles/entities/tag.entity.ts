@@ -1,0 +1,12 @@
+import {Entity, EntityProperty} from '../../../../../projects/ngFluxify/src/lib/decorators';
+import {IndexedDBEntityDescriptor} from '../../../core/descriptors';
+import {AbstractEntity} from '../../../../../projects/ngFluxify/src/lib/domain/entities';
+
+@Entity<IndexedDBEntityDescriptor>(new IndexedDBEntityDescriptor('Tag', 'NgFluxify-demo', 'Tag'))
+export class TagEntity extends AbstractEntity {
+  @EntityProperty({type: String})
+  public text: string;
+
+  @EntityProperty({type: Date})
+  public createdAt: Date = new Date();
+}

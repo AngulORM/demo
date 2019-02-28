@@ -20,6 +20,31 @@
   </clr-textarea-container>
 
   <div class="clr-row">
+    <div class="clr-col-8 clr-offset-2">
+      <div class="card">
+        <div class="card-header">Tags</div>
+        <div class="card-block">
+          <div class="card-text">
+            <clr-select-container>
+              <label>Tags</label>
+              <select clrSelect formControlName="tags" multiple name="tags">
+                <option *ngFor="let tag of tags | async" [value]="tag.id">{{ tag.text }}</option>
+              </select>
+            </clr-select-container>
+            <clr-input-container>
+              <label>New tag</label>
+              <input (keydown.enter)="addTag($event);$event.preventDefault();" clrInput formControlName="newTagText"
+                     type="text">
+              <clr-control-helper>Hit "Enter" to add</clr-control-helper>
+              <clr-control-error>Content shall not be empty</clr-control-error>
+            </clr-input-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="clr-row">
     <div class="clr-col-3 clr-offset-9">
       <button (click)="submit()" class="btn btn-primary" type="submit">Submit</button>
       <button (click)="onDelete()" *ngIf="article.id" class="btn btn-danger">Delete</button>

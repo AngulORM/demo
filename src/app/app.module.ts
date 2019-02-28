@@ -8,7 +8,6 @@ import {FormsModule} from '@angular/forms';
 import {ClarityModule} from '@clr/angular';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import {DemoModule} from './demo/demo.module';
 import {AppComponent} from './app.component';
 
 @NgModule({
@@ -19,9 +18,8 @@ import {AppComponent} from './app.component';
     BrowserModule,
     CommonModule,
     FormsModule,
-    DemoModule,
     RouterModule.forRoot([
-      {path: '', loadChildren: () => DemoModule}
+      {path: '', loadChildren: './demo/demo.module#DemoModule'}
     ]),
     NgFluxifyModule,
     ClarityModule,

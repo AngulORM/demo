@@ -1,10 +1,11 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ClrForm} from '@clr/angular';
-import {ArticleEntity} from '../../../../core/entities';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {take} from 'rxjs/operators';
+
+import {ArticleEntity, ArticleTagEntity, TagEntity} from '../../entities';
 
 @Component({
   selector: 'ngf-demo-page-articles-edit',
@@ -16,10 +17,13 @@ export class ArticlesEditComponent implements OnInit, OnDestroy {
   @ViewChild(ClrForm) clrForm;
 
   public article: ArticleEntity;
+  public tags: Observable<TagEntity[]> = <Observable<TagEntity[]>>TagEntity.readAll();
   public errorMessage: string;
   public articleForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.maxLength(100)]),
-    content: new FormControl('', Validators.required)
+    content: new FormControl('', Validators.required),
+    tags: new FormControl([]),
+    newTagText: new FormControl('')
   });
 
   private routeSub: Subscription;
@@ -36,8 +40,11 @@ export class ArticlesEditComponent implements OnInit, OnDestroy {
         this.article = new ArticleEntity();
       }
 
+      const tags = (await this.article.tags.pipe(take(1)).toPromise()).reduce((acc, tag) => acc.concat([tag.id]), []);
+
       this.articleForm.controls.title.setValue(this.article.title);
       this.articleForm.controls.content.setValue(this.article.content);
+      this.articleForm.controls.tags.setValue(tags);
     });
   }
 
@@ -56,7 +63,15 @@ export class ArticlesEditComponent implements OnInit, OnDestroy {
       this.article.updatedAt = new Date();
 
       try {
-        await this.article.save();
+        const article = await (await this.article.save()).pipe(take(1)).toPromise();
+        this.articleForm.controls.tags.value.forEach(idTag => {
+          const articleTag = new ArticleTagEntity();
+          articleTag.idArticle = article.id;
+          articleTag.idTag = idTag;
+
+          articleTag.save();
+        });
+
         this.router.navigateByUrl('/articles');
       } catch (e) {
         this.errorMessage = e.message;
@@ -75,6 +90,25 @@ export class ArticlesEditComponent implements OnInit, OnDestroy {
       }
     } else {
       this.deleteModal.open();
+    }
+  }
+
+  async addTag() {
+    if (this.articleForm.controls.newTagText.value && this.articleForm.controls.newTagText.value.trim().length) {
+      const tagText = this.articleForm.controls.newTagText.value.trim();
+
+      const tags = await this.tags.pipe(take(1)).toPromise();
+      let tag = tags.find(element => element.text.toLowerCase() === tagText.toLowerCase());
+      if (!tag) {
+        const newTag = new TagEntity();
+        newTag.text = tagText;
+        tag = <TagEntity>await (await newTag.save()).pipe(take(1)).toPromise();
+      }
+
+      this.articleForm.controls.tags.setValue([tag.id].concat(this.articleForm.controls.tags.value));
+      this.articleForm.controls.newTagText.setValue('');
+    } else {
+      this.articleForm.controls.newTagText.markAsDirty();
     }
   }
 }
