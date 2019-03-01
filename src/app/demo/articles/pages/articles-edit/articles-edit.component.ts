@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {take} from 'rxjs/operators';
 
-import {ArticleEntity, ArticleTagEntity, TagEntity} from '../../entities';
+import {ArticleEntity, TagEntity} from '../../entities';
 
 @Component({
   selector: 'ngf-demo-page-articles-edit',
@@ -63,16 +63,13 @@ export class ArticlesEditComponent implements OnInit, OnDestroy {
       this.article.updatedAt = new Date();
 
       try {
-        const article = await (await this.article.save()).pipe(take(1)).toPromise();
+        const article = <ArticleEntity>await (await this.article.save()).pipe(take(1)).toPromise();
+        article.removeTags();
         this.articleForm.controls.tags.value.forEach(idTag => {
-          const articleTag = new ArticleTagEntity();
-          articleTag.idArticle = article.id;
-          articleTag.idTag = idTag;
-
-          articleTag.save();
+          article.addTag(idTag);
         });
 
-        this.router.navigateByUrl('/articles');
+        this.router.navigate(['/articles', article.id]);
       } catch (e) {
         this.errorMessage = e.message;
       }
