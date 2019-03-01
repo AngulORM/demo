@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {DashboardComponent} from './dashboard.component';
 import {ClarityModule} from '@clr/angular';
-import {OrderbyPipe} from './pipes';
+import * as Pipes from './pipes';
 
 @NgModule({
   imports: [
@@ -13,7 +13,12 @@ import {OrderbyPipe} from './pipes';
     ]),
     ClarityModule,
   ],
-  declarations: [DashboardComponent, OrderbyPipe],
+  declarations: [
+    DashboardComponent,
+    Pipes.ObjectByteSizePipe,
+    Pipes.OrderbyPipe,
+    Pipes.ReadableBytecountPipe
+  ],
   entryComponents: [DashboardComponent],
   exports: [RouterModule]
 })
