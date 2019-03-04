@@ -1,1 +1,25 @@
-<h1>One</h1>
+<div *ngIf="(brewery | async) as brewery" class="clr-row">
+  <div class="clr-col-12">
+    <div class="card">
+      <div class="card-header">
+        {{ brewery.name }} ({{ brewery.brewery_type }})
+      </div>
+      <div class="card-block">
+        <div class="card-img">
+          <iframe
+            [src]="getSafeMapUrl(brewery)"
+            frameborder="0"
+            height="600"
+            marginheight="0"
+            marginwidth="0"
+            scrolling="no"
+            width="100%">
+          </iframe>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a [href]="brewery.website_url" class="card-link" target="_blank">{{ brewery.website_url }}</a>
+      </div>
+    </div>
+  </div>
+</div>

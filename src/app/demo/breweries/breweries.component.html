@@ -1,13 +1,9 @@
 <div class="content-area">
   <router-outlet></router-outlet>
 </div>
-<nav class="sidenav">
-  <section class="sidenav-content">
-    <a class="nav-link" routerLinkActive="active" routerLink="./">
-      List
-    </a>
-    <a class="nav-link" routerLinkActive="active" routerLink="./new">
-      Create
-    </a>
-  </section>
-</nav>
+<clr-vertical-nav [clrVerticalNavCollapsible]="true">
+  <a clrVerticalNavLink routerLink="./all" routerLinkActive="active">
+    <clr-icon clrVerticalNavIcon shape="list"></clr-icon>
+    Search
+  </a>
+</clr-vertical-nav>

@@ -4,24 +4,27 @@ import {RouterModule} from '@angular/router';
 
 import {BreweriesComponent} from './breweries.component';
 import * as Pages from './pages';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ClarityModule} from '@clr/angular';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ClarityModule,
     RouterModule.forChild([
       {
         path: '', component: BreweriesComponent, children: [
-          {path: 'new', component: Pages.BreweriesEditComponent},
-          {path: ':id/edit', component: Pages.BreweriesEditComponent},
+          {path: 'all', component: Pages.BreweriesListComponent},
           {path: ':id', component: Pages.BreweriesOneComponent},
-          {path: '**', component: Pages.BreweriesListComponent}
+          {path: '**', redirectTo: 'all'}
         ]
       }
     ])
   ],
   declarations: [
     BreweriesComponent,
-    Pages.BreweriesEditComponent,
     Pages.BreweriesListComponent,
     Pages.BreweriesOneComponent
   ],

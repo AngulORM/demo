@@ -52,6 +52,12 @@ export class BreweryEntity extends AbstractExtendedRestEntity {
     if (filters.has('name')) {
       params.set('by_name', filters.get('name'));
     }
+    if (filters.has('city')) {
+      params.set('by_city', filters.get('city'));
+    }
+    if (filters.has('type')) {
+      params.set('by_type', filters.get('type'));
+    }
 
     if (params.size === 0) {
       throw new Error('At least one filter is required');
