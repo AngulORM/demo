@@ -1,5 +1,5 @@
 <div *ngIf="(brewery | async) as brewery" class="clr-row">
-  <div class="clr-col-12">
+  <div class="clr-col-6">
     <div class="card">
       <div class="card-header">
         {{ brewery.name }} ({{ brewery.brewery_type }})
@@ -19,6 +19,24 @@
       </div>
       <div class="card-footer">
         <a [href]="brewery.website_url" class="card-link" target="_blank">{{ brewery.website_url }}</a>
+      </div>
+    </div>
+  </div>
+  <div class="clr-col-6">
+    <div class="card">
+      <div class="card-header">Beers</div>
+      <div *ngIf="(brewery.beers | async) as beers" class="card-block">
+        <div *ngIf="!beers.length" class="card-text">
+          No beer found
+        </div>
+        <ul *ngIf="beers.length" class="list">
+          <li *ngFor="let beer of beers">{{ beer.name }}</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <button [routerLink]="['/breweries/beers/new']" class="btn btn-sm btn-link">
+          Add
+        </button>
       </div>
     </div>
   </div>

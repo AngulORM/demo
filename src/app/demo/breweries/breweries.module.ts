@@ -16,6 +16,10 @@ import {ClarityModule} from '@clr/angular';
     RouterModule.forChild([
       {
         path: '', component: BreweriesComponent, children: [
+          {path: 'beers', component: Pages.BeersListComponent},
+          {path: 'beers/new', component: Pages.BeersEditComponent},
+          {path: 'beers/:id/edit', component: Pages.BeersEditComponent},
+          {path: 'beers/:id', component: Pages.BreweriesListComponent},
           {path: 'all', component: Pages.BreweriesListComponent},
           {path: ':id', component: Pages.BreweriesOneComponent},
           {path: '**', redirectTo: 'all'}
@@ -25,6 +29,8 @@ import {ClarityModule} from '@clr/angular';
   ],
   declarations: [
     BreweriesComponent,
+    Pages.BeersEditComponent,
+    Pages.BeersListComponent,
     Pages.BreweriesListComponent,
     Pages.BreweriesOneComponent
   ],

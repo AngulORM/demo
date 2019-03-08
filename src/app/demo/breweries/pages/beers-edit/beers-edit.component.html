@@ -1,0 +1,22 @@
+<form *ngIf="beer" [formGroup]="beerForm" clrForm>
+  <clr-alert (clrAlertClosedChange)="errorMessage = null" *ngIf="errorMessage" [clrAlertType]="'danger'">
+    <clr-alert-item>
+        <span class="alert-text">
+            {{ errorMessage }}
+        </span>
+    </clr-alert-item>
+  </clr-alert>
+
+  <clr-input-container>
+    <label>Name</label>
+    <input clrInput formControlName="name" type="text">
+    <clr-control-helper>Name of the beer in less than 100 characters</clr-control-helper>
+    <clr-control-error>Name shall not be empty or exceed 100 characters</clr-control-error>
+  </clr-input-container>
+
+  <div class="clr-row">
+    <div class="clr-col-3 clr-offset-9">
+      <button (click)="submit()" class="btn btn-primary" type="submit">Submit</button>
+    </div>
+  </div>
+</form>
