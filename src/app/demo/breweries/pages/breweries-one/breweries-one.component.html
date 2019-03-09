@@ -30,11 +30,13 @@
           No beer found
         </div>
         <ul *ngIf="beers.length" class="list">
-          <li *ngFor="let beer of beers">{{ beer.name }}</li>
+          <li *ngFor="let beer of beers" [routerLink]="['/breweries/beers', beer.id]">
+            {{ beer.name }} - <i>{{ beer.style }}</i>
+          </li>
         </ul>
       </div>
       <div class="card-footer">
-        <button [routerLink]="['/breweries/beers/new']" class="btn btn-sm btn-link">
+        <button [routerLink]="['/breweries', brewery.id, 'beers', 'new']" class="btn btn-sm btn-link">
           Add
         </button>
       </div>
