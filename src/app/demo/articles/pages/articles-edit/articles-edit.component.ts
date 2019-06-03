@@ -13,8 +13,8 @@ import {ArticleEntity, TagEntity} from '../../entities';
   styleUrls: ['./articles-edit.component.scss']
 })
 export class ArticlesEditComponent implements OnInit, OnDestroy {
-  @ViewChild('deleteModal') deleteModal;
-  @ViewChild(ClrForm) clrForm;
+  @ViewChild('deleteModal', {static: false}) deleteModal;
+  @ViewChild(ClrForm, {static: false}) clrForm;
 
   public article: ArticleEntity;
   public tags: Observable<TagEntity[]> = <Observable<TagEntity[]>>TagEntity.readAll();

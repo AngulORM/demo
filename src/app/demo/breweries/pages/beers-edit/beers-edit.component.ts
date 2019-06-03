@@ -12,7 +12,7 @@ import {BeerEntity} from '../../entities';
   styleUrls: ['./beers-edit.component.scss']
 })
 export class BeersEditComponent implements OnInit, OnDestroy {
-  @ViewChild(ClrForm) clrForm;
+  @ViewChild(ClrForm, {static: false}) clrForm;
 
   public beer: BeerEntity;
   public errorMessage: string;

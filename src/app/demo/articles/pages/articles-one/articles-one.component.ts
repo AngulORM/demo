@@ -10,7 +10,7 @@ import {ArticleEntity} from '../../entities';
   styleUrls: ['./articles-one.component.scss']
 })
 export class ArticlesOneComponent implements OnInit, OnDestroy {
-  @ViewChild('deleteModal') deleteModal;
+  @ViewChild('deleteModal', {static: false}) deleteModal;
 
   public article: Observable<ArticleEntity>;
   public articleToDelete: ArticleEntity;

@@ -9,7 +9,7 @@ import {ArticleEntity} from '../../entities';
   styleUrls: ['./articles-list.component.scss']
 })
 export class ArticlesListComponent {
-  @ViewChild('deleteModal') deleteModal;
+  @ViewChild('deleteModal', {static: false}) deleteModal;
 
   public articles = <Observable<ArticleEntity[]>>ArticleEntity.readAll();
   public articleToDelete: ArticleEntity;

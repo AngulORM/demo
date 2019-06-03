@@ -10,7 +10,7 @@ import {ClrForm} from '@clr/angular';
   styleUrls: ['./breweries-list.component.scss']
 })
 export class BreweriesListComponent {
-  @ViewChild(ClrForm) clrForm;
+  @ViewChild(ClrForm, {static: false}) clrForm;
 
   public searchResults: Observable<BreweryEntity[]>;
   public searchErrorMessage: string;

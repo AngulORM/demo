@@ -26,7 +26,7 @@
     "immutable": "^3.8.2",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
-    "rxjs": "^6.5.2",
+    "rxjs": "~6.4.0",
     "zone.js": "~0.9.1",
     "@clr/ui": "^1.1.0",
     "@clr/icons": "^1.1.0",
@@ -35,8 +35,8 @@
     "@angular-redux/store": "^9.0.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.7.5",
-    "@angular-devkit/build-ng-packagr": "~0.7.5",
+    "@angular-devkit/build-angular": "^0.800.1",
+    "@angular-devkit/build-ng-packagr": "^0.800.1",
     "@angular/cli": "~8.0.1",
     "@angular/compiler-cli": "^8.0.0",
     "@angular/language-service": "^8.0.0",
