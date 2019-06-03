@@ -19,9 +19,9 @@ import {AppComponent} from './app.component';
     CommonModule,
     FormsModule,
     RouterModule.forRoot([
-      {path: '', loadChildren: './demo/demo.module#DemoModule'}
+      {path: '', loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)}
     ]),
-    NgFluxifyModule,
+    NgFluxifyModule.initialize({enableStoreLogger: true}),
     ClarityModule,
     BrowserAnimationsModule
   ],
