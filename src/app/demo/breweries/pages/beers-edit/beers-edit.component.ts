@@ -17,7 +17,10 @@ export class BeersEditComponent implements OnInit, OnDestroy {
   public beer: BeerEntity;
   public errorMessage: string;
   public beerForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.maxLength(100)])
+    name: new FormControl('', [Validators.required, Validators.maxLength(150)]),
+    style: new FormControl('', [Validators.required]),
+    comment: new FormControl('', []),
+    rating: new FormControl(null, [Validators.min(0), Validators.max(5)]),
   });
 
   private routeSub: Subscription;
@@ -31,10 +34,18 @@ export class BeersEditComponent implements OnInit, OnDestroy {
       if (params['id']) {
         this.beer = <BeerEntity>await BeerEntity.read(+params['id']).pipe(take(1)).toPromise();
       } else {
-        this.beer = new BeerEntity();
+        if (params['brewery']) {
+          this.beer = new BeerEntity();
+          this.beer.idBrewery = +params['brewery'];
+        } else {
+          this.router.navigateByUrl('/breweries');
+        }
       }
 
       this.beerForm.controls.name.setValue(this.beer.name);
+      this.beerForm.controls.style.setValue(this.beer.style);
+      this.beerForm.controls.comment.setValue(this.beer.comment);
+      this.beerForm.controls.rating.setValue(this.beer.rating);
     });
   }
 
@@ -45,24 +56,21 @@ export class BeersEditComponent implements OnInit, OnDestroy {
   }
 
   async submit() {
-    // if (this.articleForm.invalid) {
-    //   this.clrForm.markAsDirty();
-    // } else {
-    //   this.article.title = this.articleForm.controls.title.value;
-    //   this.article.content = this.articleForm.controls.content.value;
-    //   this.article.updatedAt = new Date();
+    if (this.beerForm.invalid) {
+      this.clrForm.markAsDirty();
+    } else {
+      this.beer.name = this.beerForm.controls.name.value;
+      this.beer.style = this.beerForm.controls.style.value;
+      this.beer.comment = this.beerForm.controls.comment.value;
+      this.beer.rating = this.beerForm.controls.rating.value;
 
-    //   try {
-    //     const article = <ArticleEntity>await (await this.article.save()).pipe(take(1)).toPromise();
-    //     article.removeTags();
-    //     this.articleForm.controls.tags.value.forEach(idTag => {
-    //       article.addTag(idTag);
-    //     });
+      try {
+        await (await this.beer.save()).pipe(take(1)).toPromise();
 
-    //     this.router.navigate(['/articles', article.id]);
-    //   } catch (e) {
-    //     this.errorMessage = e.message;
-    //   }
-    // }
+        this.router.navigate(['/breweries', this.beer.idBrewery]);
+      } catch (e) {
+        this.errorMessage = e.message;
+      }
+    }
   }
 }

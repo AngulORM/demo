@@ -17,9 +17,9 @@ import {ClarityModule} from '@clr/angular';
       {
         path: '', component: BreweriesComponent, children: [
           {path: 'beers', component: Pages.BeersListComponent},
-          {path: 'beers/new', component: Pages.BeersEditComponent},
+          {path: ':brewery/beers/new', component: Pages.BeersEditComponent},
           {path: 'beers/:id/edit', component: Pages.BeersEditComponent},
-          {path: 'beers/:id', component: Pages.BreweriesListComponent},
+          {path: 'beers/:id', component: Pages.BeersOneComponent},
           {path: 'all', component: Pages.BreweriesListComponent},
           {path: ':id', component: Pages.BreweriesOneComponent},
           {path: '**', redirectTo: 'all'}
@@ -31,6 +31,7 @@ import {ClarityModule} from '@clr/angular';
     BreweriesComponent,
     Pages.BeersEditComponent,
     Pages.BeersListComponent,
+    Pages.BeersOneComponent,
     Pages.BreweriesListComponent,
     Pages.BreweriesOneComponent
   ],

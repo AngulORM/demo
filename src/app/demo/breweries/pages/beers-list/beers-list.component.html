@@ -2,7 +2,7 @@
   <clr-dg-column>ID</clr-dg-column>
   <clr-dg-column>Name</clr-dg-column>
 
-  <clr-dg-row *ngFor="let beer of beers | async" [clrDgItem]="beer" [routerLink]="['/beers', beer.id]">
+  <clr-dg-row *ngFor="let beer of beers | async" [clrDgItem]="beer" [routerLink]="['/breweries/beers', beer.id]">
     <clr-dg-cell>{{ beer.id }}</clr-dg-cell>
     <clr-dg-cell>{{ beer.name }}</clr-dg-cell>
   </clr-dg-row>

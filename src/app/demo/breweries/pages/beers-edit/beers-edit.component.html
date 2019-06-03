@@ -10,9 +10,27 @@
   <clr-input-container>
     <label>Name</label>
     <input clrInput formControlName="name" type="text">
-    <clr-control-helper>Name of the beer in less than 100 characters</clr-control-helper>
-    <clr-control-error>Name shall not be empty or exceed 100 characters</clr-control-error>
+    <clr-control-helper>Name of the beer in less than 150 characters</clr-control-helper>
+    <clr-control-error>Name shall not be empty or exceed 150 characters</clr-control-error>
   </clr-input-container>
+
+  <clr-input-container>
+    <label>Style</label>
+    <input clrInput formControlName="style" type="text">
+    <clr-control-helper>Style of the beer</clr-control-helper>
+    <clr-control-error>Style shall not be empty</clr-control-error>
+  </clr-input-container>
+
+  <clr-input-container>
+    <label>Rating</label>
+    <input clrInput formControlName="rating" max="5" min="0" step="0.1" type="number">
+    <clr-control-error>Rating shall be between 0 and 5</clr-control-error>
+  </clr-input-container>
+
+  <clr-textarea-container>
+    <label>Comment</label>
+    <textarea clrTextarea formControlName="comment"></textarea>
+  </clr-textarea-container>
 
   <div class="clr-row">
     <div class="clr-col-3 clr-offset-9">

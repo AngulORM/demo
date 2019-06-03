@@ -16,7 +16,7 @@ export class BeerEntity extends AbstractEntity {
   public createdAt: Date = new Date();
 
   @EntityProperty({type: Number})
-  public note: number;
+  public rating: number;
 
   @EntityProperty({type: String})
   public comment: string;

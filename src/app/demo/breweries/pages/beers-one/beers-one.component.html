@@ -1,0 +1,22 @@
+<div *ngIf="(beer | async) as beer" class="clr-row">
+  <div class="clr-col-6 clr-offset-3">
+    <div class="card">
+      <div class="card-header">
+        {{ beer.name }} ({{ (beer.brewery | async)?.name }})
+      </div>
+      <div class="card-block">
+        <div class="card-text">{{ beer.style }}</div>
+        <div *ngIf="beer.rating" class="card-text">{{ beer.rating }} / 5</div>
+        <div *ngIf="beer.comment" class="card-text">{{ beer.comment }}</div>
+      </div>
+      <div class="card-footer">
+        <button [routerLink]="['/breweries/beers', beer.id, 'edit']" class="btn btn-sm btn-link">
+          Edit
+        </button>
+        <button [routerLink]="['/breweries', beer.idBrewery]" class="btn btn-sm btn-link">
+          Brewery
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
