@@ -6,7 +6,7 @@
       <clr-stack-view>
         <clr-stack-header>Managed entities</clr-stack-header>
 
-        <clr-stack-block *ngFor="let entity of ngFluxify.entitites | orderBy:'name'">
+        <clr-stack-block *ngFor="let entity of ngFluxify.entities | orderBy:'name'">
           <clr-stack-label>{{ entity.name }}</clr-stack-label>
           <clr-stack-content>
             <div class="progress labeled">
@@ -52,7 +52,7 @@
           </clr-stack-block>
         </clr-stack-block>
 
-        <clr-stack-block *ngIf="!ngFluxify.entitites.length">
+        <clr-stack-block *ngIf="!ngFluxify.entities.length">
           <clr-stack-label></clr-stack-label>
           <clr-stack-content>There is currently no entity</clr-stack-content>
         </clr-stack-block>

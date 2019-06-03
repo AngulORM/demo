@@ -21,7 +21,7 @@ import {AppComponent} from './app.component';
     RouterModule.forRoot([
       {path: '', loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)}
     ]),
-    NgFluxifyModule.initialize({enableStoreLogger: true}),
+    NgFluxifyModule,
     ClarityModule,
     BrowserAnimationsModule
   ],
