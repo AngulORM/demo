@@ -32,7 +32,7 @@ export class BeersEditComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(async params => {
       if (params['id']) {
-        this.beer = <BeerEntity>await BeerEntity.read(+params['id']).pipe(take(1)).toPromise();
+        this.beer = await BeerEntity.read<BeerEntity>(+params['id']).pipe(take(1)).toPromise();
       } else {
         if (params['brewery']) {
           this.beer = new BeerEntity();

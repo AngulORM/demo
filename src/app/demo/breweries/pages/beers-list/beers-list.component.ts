@@ -8,5 +8,5 @@ import {Observable} from 'rxjs';
   styleUrls: ['./beers-list.component.scss']
 })
 export class BeersListComponent {
-  public beers: Observable<BeerEntity[]> = <Observable<BeerEntity[]>>BeerEntity.readAll();
+  public beers: Observable<BeerEntity[]> = BeerEntity.readAll<BeerEntity>();
 }

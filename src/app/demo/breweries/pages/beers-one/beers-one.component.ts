@@ -20,7 +20,7 @@ export class BeersOneComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
       if (params['id']) {
-        this.beer = <Observable<BeerEntity>>BeerEntity.read(+params['id']);
+        this.beer = BeerEntity.read<BeerEntity>(+params['id']);
       } else {
         this.router.navigateByUrl('/breweries/beers');
       }

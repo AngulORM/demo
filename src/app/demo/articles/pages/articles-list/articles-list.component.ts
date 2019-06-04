@@ -1,5 +1,4 @@
 import {Component, ViewChild} from '@angular/core';
-import {Observable} from 'rxjs';
 
 import {ArticleEntity} from '../../entities';
 
@@ -11,7 +10,7 @@ import {ArticleEntity} from '../../entities';
 export class ArticlesListComponent {
   @ViewChild('deleteModal', {static: false}) deleteModal;
 
-  public articles = <Observable<ArticleEntity[]>>ArticleEntity.readAll();
+  public articles = ArticleEntity.readAll<ArticleEntity>();
   public articleToDelete: ArticleEntity;
 
   async onDelete(article: ArticleEntity, confirm = false) {

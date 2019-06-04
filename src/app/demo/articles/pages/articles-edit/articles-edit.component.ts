@@ -17,7 +17,7 @@ export class ArticlesEditComponent implements OnInit, OnDestroy {
   @ViewChild(ClrForm, {static: false}) clrForm;
 
   public article: ArticleEntity;
-  public tags: Observable<TagEntity[]> = <Observable<TagEntity[]>>TagEntity.readAll();
+  public tags: Observable<TagEntity[]> = TagEntity.readAll<TagEntity>();
   public errorMessage: string;
   public articleForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.maxLength(100)]),
@@ -35,7 +35,7 @@ export class ArticlesEditComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(async params => {
       if (params['id']) {
-        this.article = <ArticleEntity>await ArticleEntity.read(+params['id']).pipe(take(1)).toPromise();
+        this.article = await ArticleEntity.read<ArticleEntity>(+params['id']).pipe(take(1)).toPromise();
       } else {
         this.article = new ArticleEntity();
       }
@@ -63,7 +63,7 @@ export class ArticlesEditComponent implements OnInit, OnDestroy {
       this.article.updatedAt = new Date();
 
       try {
-        const article = <ArticleEntity>await (await this.article.save()).pipe(take(1)).toPromise();
+        const article = await (await this.article.save<ArticleEntity>()).pipe(take(1)).toPromise();
         article.removeTags();
         this.articleForm.controls.tags.value.forEach(idTag => {
           article.addTag(idTag);
@@ -99,7 +99,7 @@ export class ArticlesEditComponent implements OnInit, OnDestroy {
       if (!tag) {
         const newTag = new TagEntity();
         newTag.text = tagText;
-        tag = <TagEntity>await (await newTag.save()).pipe(take(1)).toPromise();
+        tag = await (await newTag.save<TagEntity>()).pipe(take(1)).toPromise();
       }
 
       this.articleForm.controls.tags.setValue([tag.id].concat(this.articleForm.controls.tags.value));

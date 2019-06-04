@@ -72,7 +72,7 @@ export class BreweryEntity extends AbstractExtendedRestEntity {
   public get beers(): Observable<BeerEntity[]> {
     if (!this._beers) {
       this._beers = BeerEntity
-        .readAll()
+        .readAll<BeerEntity>()
         .pipe(map((beers: BeerEntity[]) => beers.filter(beer => beer.idBrewery === this.id)));
     }
 

@@ -25,10 +25,10 @@ export class ArticleEntity extends AbstractEntity {
   public get tags(): Observable<TagEntity[]> {
     if (!this._tags) {
       this._tags = TagEntity
-        .readAll()
+        .readAll<TagEntity>()
         .pipe(withLatestFrom(
           ArticleTagEntity
-            .readAll()
+            .readAll<ArticleTagEntity>()
             .pipe(map((articleTags: ArticleTagEntity[]) => articleTags.filter(articleTag => articleTag.idArticle === this.id))),
           (tags: TagEntity[], articleTags: ArticleTagEntity[]) => tags.filter(tag => articleTags.some(articleTag => articleTag.idTag === tag.id)))
         );
@@ -42,13 +42,13 @@ export class ArticleEntity extends AbstractEntity {
     articleTag.idArticle = this.id;
     articleTag.idTag = tag instanceof TagEntity ? tag.id : tag;
 
-    return <Promise<Observable<ArticleTagEntity>>>articleTag.save();
+    return articleTag.save<ArticleTagEntity>();
   }
 
   public async removeTags() {
     const articleTags =
       await ArticleTagEntity
-        .readAll()
+        .readAll<ArticleTagEntity>()
         .pipe(map((elements: ArticleTagEntity[]) => elements.filter(articleTag => articleTag.idArticle === this.id)))
         .pipe(take(1))
         .toPromise();

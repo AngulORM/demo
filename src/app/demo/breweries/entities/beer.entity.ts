@@ -28,7 +28,7 @@ export class BeerEntity extends AbstractEntity {
 
   public get brewery(): Observable<BreweryEntity> {
     if (!this._brewery) {
-      this._brewery = <Observable<BreweryEntity>>BreweryEntity.read(this.idBrewery);
+      this._brewery = BreweryEntity.read<BreweryEntity>(this.idBrewery);
     }
 
     return this._brewery;

@@ -24,7 +24,7 @@ export class ArticlesOneComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
       if (params['id']) {
-        this.article = <Observable<ArticleEntity>>ArticleEntity.read(+params['id']);
+        this.article = ArticleEntity.read<ArticleEntity>(+params['id']);
       } else {
         this.router.navigateByUrl('/articles');
       }
