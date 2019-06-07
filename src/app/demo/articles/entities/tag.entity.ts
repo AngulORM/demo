@@ -4,6 +4,9 @@ import {AbstractEntity} from '../../../../../projects/ngFluxify/src/lib/domain/e
 
 @Entity<IndexedDBEntityDescriptor>(new IndexedDBEntityDescriptor('Tag', 'NgFluxify-demo', 'Tag'))
 export class TagEntity extends AbstractEntity {
+  @EntityProperty({type: Number, primary: true})
+  public id: number;
+
   @EntityProperty({type: String})
   public text: string;
 

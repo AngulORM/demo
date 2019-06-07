@@ -8,6 +8,9 @@ import {map, take, withLatestFrom} from 'rxjs/operators';
 
 @Entity<IndexedDBEntityDescriptor>(new IndexedDBEntityDescriptor('Article', 'NgFluxify-demo', 'Article'))
 export class ArticleEntity extends AbstractEntity {
+  @EntityProperty({type: Number, primary: true})
+  public id: number;
+
   @EntityProperty({type: String})
   public title: string;
 
@@ -29,8 +32,8 @@ export class ArticleEntity extends AbstractEntity {
         .pipe(withLatestFrom(
           ArticleTagEntity
             .readAll<ArticleTagEntity>()
-            .pipe(map((articleTags: ArticleTagEntity[]) => articleTags.filter(articleTag => articleTag.idArticle === this.id))),
-          (tags: TagEntity[], articleTags: ArticleTagEntity[]) => tags.filter(tag => articleTags.some(articleTag => articleTag.idTag === tag.id)))
+            .pipe(map((articleTags: ArticleTagEntity[]) => articleTags.filter(articleTag => articleTag.idArticle === this.primary))),
+          (tags: TagEntity[], articleTags: ArticleTagEntity[]) => tags.filter(tag => articleTags.some(articleTag => articleTag.idTag === tag.primary)))
         );
     }
 
@@ -40,7 +43,7 @@ export class ArticleEntity extends AbstractEntity {
   public addTag(tag: number | TagEntity): Promise<Observable<ArticleTagEntity>> {
     const articleTag = new ArticleTagEntity();
     articleTag.idArticle = this.id;
-    articleTag.idTag = tag instanceof TagEntity ? tag.id : tag;
+    articleTag.idTag = tag instanceof TagEntity ? tag.primary : tag;
 
     return articleTag.save<ArticleTagEntity>();
   }

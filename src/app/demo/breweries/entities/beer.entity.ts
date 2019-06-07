@@ -6,6 +6,9 @@ import {BreweryEntity} from './brewery.entity';
 
 @Entity<IndexedDBEntityDescriptor>(new IndexedDBEntityDescriptor('Beer', 'NgFluxify-demo', 'Beer'))
 export class BeerEntity extends AbstractEntity {
+  @EntityProperty({type: Number, primary: true})
+  public id: number;
+
   @EntityProperty({type: String})
   public name: string;
 

@@ -9,6 +9,7 @@ import {ClarityModule} from '@clr/angular';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import {AppComponent} from './app.component';
     RouterModule.forRoot([
       {path: '', loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)}
     ]),
-    NgFluxifyModule,
+    NgFluxifyModule.initialize({enableStoreLogger: !environment.production}),
     ClarityModule,
     BrowserAnimationsModule
   ],

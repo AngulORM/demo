@@ -38,7 +38,7 @@ export class IndexedDBEntityService<T extends AbstractEntity> implements IEntity
     });
   }
 
-  public read(id: number) {
+  public read(id: any): Promise<any> {
     return new Promise(async (resolve, reject) => {
       const store = await this.getObjectStore();
       const request = store.get(id);
@@ -67,7 +67,7 @@ export class IndexedDBEntityService<T extends AbstractEntity> implements IEntity
   public async create(entity: T): Promise<any> {
     return new Promise(async (resolve, reject) => {
       const sanitizedEntity = entity.sanitized;
-      delete sanitizedEntity.id;
+      delete sanitizedEntity[entity.constructor['primaryKey'][0]];
 
       const store = await this.getObjectStore();
       const request = store.put(sanitizedEntity);
@@ -88,12 +88,12 @@ export class IndexedDBEntityService<T extends AbstractEntity> implements IEntity
         reject('Can\'t update');
       };
       request.onsuccess = (event) => {
-        this.read(entity.id).then(data => resolve(data)).catch(error => reject(error));
+        this.read(entity.primary).then(data => resolve(data)).catch(error => reject(error));
       };
     });
   }
 
-  public async delete(id: number): Promise<any> {
+  public async delete(id: any): Promise<any> {
     return new Promise(async (resolve, reject) => {
       const store = await this.getObjectStore();
       const request = store.delete(id);

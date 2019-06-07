@@ -20,9 +20,9 @@ export abstract class AbstractExtendedRestEntity extends AbstractRestEntity {
 
           throwError(transaction.error);
         }
-        return EntityManager.ngRedux.select<ImmutableMap<number, AbstractRestEntity>>([this.entityManager.entityDescriptor.name, 'entities'])
+        return EntityManager.ngRedux.select<ImmutableMap<any, AbstractRestEntity>>([this.entityManager.entityDescriptor.name, 'entities'])
           .pipe(map(entities => entities.toArray()))
-          .pipe(map(entities => entities.filter(entity => transaction.entities.indexOf(entity.id) !== -1)));
+          .pipe(map(entities => entities.filter(entity => transaction.entities.indexOf(entity.primary) !== -1)));
       })).subscribe(
       next => subject.next(next),
       error => subject.error(error),

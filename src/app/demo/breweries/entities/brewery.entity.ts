@@ -9,6 +9,9 @@ import {BeerEntity} from './beer.entity';
 
 @Entity(new ExtendedRestEntityDescriptor('Brewery', environment.breweriesAPIUrl))
 export class BreweryEntity extends AbstractExtendedRestEntity {
+  @EntityProperty({type: Number, primary: true})
+  public id: number;
+
   @EntityProperty({type: String})
   public name: string;
 
