@@ -1,4 +1,4 @@
-import {EntityDescriptor} from '../../../../projects/ngFluxify/src/lib/domain/descriptors';
+import {EntityDescriptor, EntityDescriptorAttributes} from '../../../../projects/ngFluxify/src/lib/domain/descriptors';
 import {DumbReducer} from '../../../../projects/ngFluxify/src/lib/stores/reducers';
 import {IndexedDBEntityService} from '../services';
 
@@ -8,9 +8,15 @@ export class IndexedDBEntityDescriptor extends EntityDescriptor {
   database: string;
   table: string;
 
-  constructor(_name: string, _database: string, _table: string) {
-    super(_name);
-    this.database = _database;
-    this.table = _table;
+  constructor(attributes: IndexedDBEntityDescriptorAttributes) {
+    super(attributes);
+
+    this.database = attributes.database;
+    this.table = attributes.table;
   }
+}
+
+export interface IndexedDBEntityDescriptorAttributes extends EntityDescriptorAttributes {
+  database: string;
+  table: string;
 }

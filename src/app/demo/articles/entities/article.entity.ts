@@ -6,7 +6,11 @@ import {TagEntity} from './tag.entity';
 import {ArticleTagEntity} from './article-tag.entity';
 import {map, take, withLatestFrom} from 'rxjs/operators';
 
-@Entity<IndexedDBEntityDescriptor>(new IndexedDBEntityDescriptor('Article', 'NgFluxify-demo', 'Article'))
+@Entity<IndexedDBEntityDescriptor>(new IndexedDBEntityDescriptor({
+  name: 'Article',
+  database: 'NgFluxify-demo',
+  table: 'Article'
+}))
 export class ArticleEntity extends AbstractEntity {
   @EntityProperty({type: Number, primary: true})
   public id: number;

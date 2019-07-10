@@ -4,7 +4,11 @@ import {AbstractEntity} from '../../../../../projects/ngFluxify/src/lib/domain/e
 import {Observable} from 'rxjs';
 import {BreweryEntity} from './brewery.entity';
 
-@Entity<IndexedDBEntityDescriptor>(new IndexedDBEntityDescriptor('Beer', 'NgFluxify-demo', 'Beer'))
+@Entity<IndexedDBEntityDescriptor>(new IndexedDBEntityDescriptor({
+  name: 'Beer',
+  database: 'NgFluxify-demo',
+  table: 'Beer'
+}))
 export class BeerEntity extends AbstractEntity {
   @EntityProperty({type: Number, primary: true})
   public id: number;
