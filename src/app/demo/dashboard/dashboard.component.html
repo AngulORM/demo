@@ -11,32 +11,32 @@
           <clr-stack-content>
             <div class="progress labeled">
               <progress [max]="50"
-                        [value]="ngFluxify.ngRedux.getState()[entity.name].get('entities').size"></progress>
-              <span>{{ ngFluxify.ngRedux.getState()[entity.name].get('entities').size }}</span>
+                        [value]="ngFluxify.ngReduxService.state[entity.name].get('entities').size"></progress>
+              <span>{{ ngFluxify.ngReduxService.state[entity.name].get('entities').size }}</span>
             </div>
           </clr-stack-content>
 
           <clr-stack-block>
             <clr-stack-label>State</clr-stack-label>
-            <clr-stack-content>{{ ngFluxify.ngRedux.getState()[entity.name].get('state') }}</clr-stack-content>
+            <clr-stack-content>{{ ngFluxify.ngReduxService.state[entity.name].get('state') }}</clr-stack-content>
           </clr-stack-block>
 
           <clr-stack-block>
             <clr-stack-label>Store memory</clr-stack-label>
             <clr-stack-content>
-              {{ ngFluxify.ngRedux.getState()[entity.name] | objectByteSize | readableBytecount:2 }}
+              {{ ngFluxify.ngReduxService.state[entity.name] | objectByteSize | readableBytecount:2 }}
             </clr-stack-content>
           </clr-stack-block>
 
           <clr-stack-block>
             <clr-stack-label>Complete</clr-stack-label>
-            <clr-stack-content>{{ ngFluxify.ngRedux.getState()[entity.name].get('isComplete') }}</clr-stack-content>
+            <clr-stack-content>{{ ngFluxify.ngReduxService.state[entity.name].get('isComplete') }}</clr-stack-content>
           </clr-stack-block>
 
           <clr-stack-block>
             <clr-stack-label>Entities</clr-stack-label>
-            <clr-stack-content>{{ ngFluxify.ngRedux.getState()[entity.name].get('entities').size }}</clr-stack-content>
-            <clr-stack-block *ngFor="let element of ngFluxify.ngRedux.getState()[entity.name].get('entities')">
+            <clr-stack-content>{{ ngFluxify.ngReduxService.state[entity.name].get('entities').size }}</clr-stack-content>
+            <clr-stack-block *ngFor="let element of ngFluxify.ngReduxService.state[entity.name].get('entities')">
               <clr-stack-label></clr-stack-label>
               <clr-stack-content>{{ element[1].sanitized | json }}</clr-stack-content>
             </clr-stack-block>
@@ -44,8 +44,8 @@
 
           <clr-stack-block>
             <clr-stack-label>Transactions</clr-stack-label>
-            <clr-stack-content>{{ ngFluxify.ngRedux.getState()[entity.name].get('transactions').size }}</clr-stack-content>
-            <clr-stack-block *ngFor="let element of ngFluxify.ngRedux.getState()[entity.name].get('transactions')">
+            <clr-stack-content>{{ ngFluxify.ngReduxService.state[entity.name].get('transactions').size }}</clr-stack-content>
+            <clr-stack-block *ngFor="let element of ngFluxify.ngReduxService.state[entity.name].get('transactions')">
               <clr-stack-label></clr-stack-label>
               <clr-stack-content>{{ element[1] | json }}</clr-stack-content>
             </clr-stack-block>

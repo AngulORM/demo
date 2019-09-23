@@ -1,12 +1,13 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
-import {NgFluxifyModule} from '../../projects/ngFluxify/src/public_api';
+import {HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
-import {ClarityModule} from '@clr/angular';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ClarityModule} from '@clr/angular';
+
+import {NgFluxifyModule} from '../../projects/ngFluxify/src/public_api';
 
 import {AppComponent} from './app.component';
 import {environment} from '../environments/environment';
@@ -19,6 +20,7 @@ import {environment} from '../environments/environment';
     BrowserModule,
     CommonModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
       {path: '', loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)}
     ]),

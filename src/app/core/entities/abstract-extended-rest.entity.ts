@@ -17,10 +17,9 @@ export abstract class AbstractExtendedRestEntity extends AbstractRestEntity {
       .pipe(filter(transaction => [TransactionState.finished, TransactionState.error].indexOf(transaction.state) !== -1))
       .pipe<AbstractRestEntity[]>(mergeMap((transaction: TransactionState) => {
         if (transaction.state === TransactionState.error) {
-
           throwError(transaction.error);
         }
-        return EntityManager.ngRedux.select<ImmutableMap<any, AbstractRestEntity>>([this.entityManager.entityDescriptor.name, 'entities'])
+        return this.entityManager.ngRedux.select<ImmutableMap<any, AbstractRestEntity>>([this.entityManager.entityDescriptor.name, 'entities'])
           .pipe(map(entities => entities.toArray()))
           .pipe(map(entities => entities.filter(entity => transaction.entities.indexOf(entity.primary) !== -1)));
       })).subscribe(

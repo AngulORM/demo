@@ -4,11 +4,12 @@ import {DumbReducer} from '../../../../projects/ngFluxify/src/lib/stores/reducer
 import {AbstractEntity} from '../../../../projects/ngFluxify/src/lib/domain/entities';
 import {EntityDescriptor} from '../../../../projects/ngFluxify/src/lib/domain/descriptors';
 import {ErrorAction, RequestAction, ResponseAction} from '../../../../projects/ngFluxify/src/lib/stores/actions';
+import {AbstractExtendedRestEntity} from '../entities';
 
 export class ExtendedRestReducer<T extends AbstractEntity> extends DumbReducer<T> {
   static readonly ACTION_SEARCH = ['SEARCH'];
 
-  constructor(entityDescriptor: EntityDescriptor) {
+  constructor(entityDescriptor: EntityDescriptor<AbstractExtendedRestEntity>) {
     super(entityDescriptor);
 
     this.actionsManager.addActionSet(ExtendedRestReducer.ACTION_SEARCH);

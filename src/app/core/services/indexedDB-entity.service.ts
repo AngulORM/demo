@@ -5,7 +5,7 @@ import {IndexedDBEntityDescriptor} from '../descriptors';
 export class IndexedDBEntityService<T extends AbstractEntity> implements IEntityService<T> {
   private static databases: Map<string, IDBDatabase> = new Map<string, IDBDatabase>();
 
-  constructor(private entityDescriptor: IndexedDBEntityDescriptor) {
+  constructor(private entityDescriptor: IndexedDBEntityDescriptor<T>) {
 
   }
 

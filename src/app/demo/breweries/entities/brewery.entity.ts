@@ -8,7 +8,7 @@ import {ExtendedRestEntityDescriptor} from '../../../core/descriptors';
 import {AbstractExtendedRestEntity} from '../../../core/entities';
 import {BeerEntity} from './beer.entity';
 
-@Entity(new ExtendedRestEntityDescriptor({
+@Entity(new ExtendedRestEntityDescriptor<BreweryEntity>({
   name: 'Brewery',
   route: environment.breweriesAPIUrl
 }))

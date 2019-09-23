@@ -6,7 +6,7 @@ import {TagEntity} from './tag.entity';
 import {ArticleTagEntity} from './article-tag.entity';
 import {map, take, withLatestFrom} from 'rxjs/operators';
 
-@Entity<IndexedDBEntityDescriptor>(new IndexedDBEntityDescriptor({
+@Entity(new IndexedDBEntityDescriptor<ArticleEntity>({
   name: 'Article',
   database: 'NgFluxify-demo',
   table: 'Article'
