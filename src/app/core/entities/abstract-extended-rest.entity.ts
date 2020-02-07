@@ -6,6 +6,7 @@ import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {filter, map, mergeMap} from 'rxjs/operators';
 import {Map as ImmutableMap} from 'immutable';
 
+// @ts-ignore
 export abstract class AbstractExtendedRestEntity extends AbstractRestEntity {
   public static entityManager: EntityManager<AbstractExtendedRestEntity>;
   public static entityService: ExtendedRestService<AbstractExtendedRestEntity>;

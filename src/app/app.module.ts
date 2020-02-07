@@ -25,6 +25,7 @@ import {environment} from '../environments/environment';
       {path: '', loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)}
     ]),
     NgFluxifyModule.initialize({enableStoreLogger: !environment.production}),
+    NgFluxifyModule,
     ClarityModule,
     BrowserAnimationsModule
   ],

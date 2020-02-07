@@ -1,6 +1,6 @@
-import {IEntityService} from '../../../../projects/ngFluxify/src/lib/services';
 import {AbstractEntity} from '../../../../projects/ngFluxify/src/lib/domain/entities';
 import {IndexedDBEntityDescriptor} from '../descriptors';
+import {IEntityService} from '../../../../projects/ngFluxify/src/lib/services/IEntity.service';
 
 export class IndexedDBEntityService<T extends AbstractEntity> implements IEntityService<T> {
   private static databases: Map<string, IDBDatabase> = new Map<string, IDBDatabase>();
