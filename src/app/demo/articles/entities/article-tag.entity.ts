@@ -1,6 +1,5 @@
-import {Entity, EntityProperty} from '../../../../../projects/ngFluxify/src/lib/decorators';
-import {IndexedDBEntityDescriptor} from '../../../core/descriptors';
-import {AbstractEntity} from '../../../../../projects/ngFluxify/src/lib/domain/entities';
+import {Entity, EntityProperty, AbstractEntity} from '../../../../../projects/ngFluxify/src/public_api';
+import {IndexedDBEntityDescriptor} from '../../../core';
 
 @Entity(new IndexedDBEntityDescriptor<ArticleTagEntity>({
   name: 'ArticleTag',

@@ -1,10 +1,9 @@
-import {AbstractRestEntity} from '../../../../projects/ngFluxify/src/lib/domain/entities';
-import {EntityManager, TransactionState} from '../../../../projects/ngFluxify/src/lib/domain/api';
-import {ExtendedRestService} from '../services';
-import {ExtendedRestReducer} from '../reducers';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {filter, map, mergeMap} from 'rxjs/operators';
 import {Map as ImmutableMap} from 'immutable';
+import {EntityManager, TransactionState, AbstractRestEntity} from '../../../../projects/ngFluxify/src/public_api';
+import {ExtendedRestService} from '../services';
+import {ExtendedRestReducer} from '../reducers';
 
 // @ts-ignore
 export abstract class AbstractExtendedRestEntity extends AbstractRestEntity {

@@ -1,10 +1,9 @@
-import {Entity, EntityProperty} from '../../../../../projects/ngFluxify/src/lib/decorators';
-import {IndexedDBEntityDescriptor} from '../../../core/descriptors';
-import {AbstractEntity} from '../../../../../projects/ngFluxify/src/lib/domain/entities';
 import {Observable} from 'rxjs';
+import {map, take, withLatestFrom} from 'rxjs/operators';
+import {Entity, EntityProperty, AbstractEntity} from '../../../../../projects/ngFluxify/src/public_api';
+import {IndexedDBEntityDescriptor} from '../../../core';
 import {TagEntity} from './tag.entity';
 import {ArticleTagEntity} from './article-tag.entity';
-import {map, take, withLatestFrom} from 'rxjs/operators';
 
 @Entity(new IndexedDBEntityDescriptor<ArticleEntity>({
   name: 'Article',

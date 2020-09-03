@@ -1,11 +1,9 @@
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
-import {AbstractRestEntity} from '../../../../../projects/ngFluxify/src/lib/domain/entities';
-import {Entity, EntityProperty} from '../../../../../projects/ngFluxify/src/lib/decorators';
+import {AbstractRestEntity, Entity, EntityProperty} from '../../../../../projects/ngFluxify/src/public_api';
 import {environment} from '../../../../environments/environment';
-import {ExtendedRestEntityDescriptor} from '../../../core/descriptors';
-import {AbstractExtendedRestEntity} from '../../../core/entities';
+import {ExtendedRestEntityDescriptor, AbstractExtendedRestEntity} from '../../../core';
 import {BeerEntity} from './beer.entity';
 
 @Entity(new ExtendedRestEntityDescriptor<BreweryEntity>({

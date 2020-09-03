@@ -1,6 +1,9 @@
-import {EntityDescriptor, EntityDescriptorAttributes} from '../../../../projects/ngFluxify/src/lib/domain/descriptors';
-import {DumbReducer} from '../../../../projects/ngFluxify/src/lib/stores/reducers';
-import {AbstractEntity} from '../../../../projects/ngFluxify/src/lib/domain/entities';
+import {
+  EntityDescriptor,
+  EntityDescriptorAttributes,
+  DumbReducer,
+  AbstractEntity
+} from '../../../../projects/ngFluxify/src/public_api';
 import {IndexedDBEntityService} from '../services';
 
 export class IndexedDBEntityDescriptor<T extends AbstractEntity> extends EntityDescriptor<T> {

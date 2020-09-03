@@ -1,16 +1,21 @@
 import {AnyAction} from 'redux';
 import {Map} from 'immutable';
-import {DumbReducer} from '../../../../projects/ngFluxify/src/lib/stores/reducers';
-import {AbstractEntity} from '../../../../projects/ngFluxify/src/lib/domain/entities';
-import {EntityDescriptor} from '../../../../projects/ngFluxify/src/lib/domain/descriptors';
-import {ErrorAction, RequestAction, ResponseAction} from '../../../../projects/ngFluxify/src/lib/stores/actions';
+import {
+  NgFluxifyConfig,
+  AbstractEntity,
+  DumbReducer,
+  EntityDescriptor,
+  ErrorAction,
+  RequestAction,
+  ResponseAction
+} from "../../../../projects/ngFluxify/src/public_api";
 import {AbstractExtendedRestEntity} from '../entities';
 
 export class ExtendedRestReducer<T extends AbstractEntity> extends DumbReducer<T> {
   static readonly ACTION_SEARCH = ['SEARCH'];
 
-  constructor(entityDescriptor: EntityDescriptor<AbstractExtendedRestEntity>) {
-    super(entityDescriptor);
+  constructor(entityDescriptor: EntityDescriptor<AbstractExtendedRestEntity>, ngFluxifyConfig: NgFluxifyConfig) {
+    super(entityDescriptor, ngFluxifyConfig);
 
     this.actionsManager.addActionSet(ExtendedRestReducer.ACTION_SEARCH);
   }

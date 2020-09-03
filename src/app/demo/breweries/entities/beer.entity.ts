@@ -1,7 +1,6 @@
-import {Entity, EntityProperty} from '../../../../../projects/ngFluxify/src/lib/decorators';
-import {IndexedDBEntityDescriptor} from '../../../core/descriptors';
-import {AbstractEntity} from '../../../../../projects/ngFluxify/src/lib/domain/entities';
 import {Observable} from 'rxjs';
+import {Entity, EntityProperty, AbstractEntity} from '../../../../../projects/ngFluxify/src/public_api';
+import {IndexedDBEntityDescriptor} from '../../../core';
 import {BreweryEntity} from './brewery.entity';
 
 @Entity(new IndexedDBEntityDescriptor<BeerEntity>({

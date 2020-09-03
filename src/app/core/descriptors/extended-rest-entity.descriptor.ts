@@ -1,4 +1,4 @@
-import {RestEntityDescriptor, RestEntityDescriptorAttributes} from '../../../../projects/ngFluxify/src/lib/domain/descriptors';
+import {RestEntityDescriptor, RestEntityDescriptorAttributes} from '../../../../projects/ngFluxify/src/public_api';
 import {ExtendedRestReducer} from '../reducers';
 import {ExtendedRestService} from '../services';
 import {AbstractExtendedRestEntity} from '../entities';

@@ -10,7 +10,6 @@ import {ClarityModule} from '@clr/angular';
 import {NgFluxifyModule} from '../../projects/ngFluxify/src/public_api';
 
 import {AppComponent} from './app.component';
-import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -24,8 +23,7 @@ import {environment} from '../environments/environment';
     RouterModule.forRoot([
       {path: '', loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)}
     ]),
-    NgFluxifyModule.initialize({enableStoreLogger: !environment.production}),
-    NgFluxifyModule,
+    NgFluxifyModule.initialize({enableDynamicStateMutability: true}),
     ClarityModule,
     BrowserAnimationsModule
   ],
@@ -33,6 +31,4 @@ import {environment} from '../environments/environment';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor() {
-  }
 }

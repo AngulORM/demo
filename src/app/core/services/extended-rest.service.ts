@@ -1,5 +1,4 @@
-import {AbstractRestEntity} from '../../../../projects/ngFluxify/src/lib/domain/entities';
-import {RestService} from '../../../../projects/ngFluxify/src/lib/services/rest-service';
+import {AbstractRestEntity, RestService} from '../../../../projects/ngFluxify/src/public_api';
 
 export class ExtendedRestService<T extends AbstractRestEntity> extends RestService<T> {
   public search(filters: Map<string, string>): Promise<any> {

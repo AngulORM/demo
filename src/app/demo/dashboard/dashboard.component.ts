@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NgFluxifyModule} from '../../../../projects/ngFluxify/src/lib/ng-fluxify.module';
+import {NgFluxifyModule} from '../../../../projects/ngFluxify/src/public_api';
 
 @Component({
   selector: 'ngf-demo-page-dashboard',
