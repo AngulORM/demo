@@ -8,7 +8,7 @@ import {ArticleEntity} from '../../entities';
   styleUrls: ['./articles-list.component.scss']
 })
 export class ArticlesListComponent {
-  @ViewChild('deleteModal', {static: false}) deleteModal;
+  @ViewChild('deleteModal') deleteModal;
 
   public articles = ArticleEntity.readAll<ArticleEntity>();
   public articleToDelete: ArticleEntity;
