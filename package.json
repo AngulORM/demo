@@ -31,8 +31,8 @@
     "@clr/ui": "2.4.5",
     "@clr/icons": "2.4.5",
     "@webcomponents/custom-elements": "^1.0.0",
-    "@angular-redux/form": "^9.0.1",
-    "@angular-redux/store": "^9.0.0"
+    "@angular-redux/form": "10.0.0",
+    "@angular-redux/store": "10.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.29",
@@ -43,7 +43,7 @@
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
-    "codelyzer": "~4.2.1",
+    "codelyzer": "6.0.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
