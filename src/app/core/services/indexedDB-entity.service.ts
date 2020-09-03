@@ -69,6 +69,7 @@ export class IndexedDBEntityService<T extends AbstractEntity> implements IEntity
       delete sanitizedEntity[entity.constructor['primaryKey'][0]];
 
       const store = await this.getObjectStore();
+      delete sanitizedEntity.id;
       const request = store.put(sanitizedEntity);
       request.onerror = (event) => {
         reject('Can\'t create');
