@@ -33,21 +33,12 @@
             <clr-stack-content>{{ ngFluxify.ngReduxService.state[entity.name].get('isComplete') }}</clr-stack-content>
           </clr-stack-block>
 
-          <clr-stack-block>
+          <clr-stack-block *ngIf="(entity.class.readAll() | async) as entities">
             <clr-stack-label>Entities</clr-stack-label>
-            <clr-stack-content>{{ ngFluxify.ngReduxService.state[entity.name].get('entities').size }}</clr-stack-content>
-            <clr-stack-block *ngFor="let element of ngFluxify.ngReduxService.state[entity.name].get('entities')">
+            <clr-stack-content>{{ entities.length }}</clr-stack-content>
+            <clr-stack-block *ngFor="let element of entities">
               <clr-stack-label></clr-stack-label>
-              <clr-stack-content>{{ element[1].sanitized | json }}</clr-stack-content>
-            </clr-stack-block>
-          </clr-stack-block>
-
-          <clr-stack-block>
-            <clr-stack-label>Transactions</clr-stack-label>
-            <clr-stack-content>{{ ngFluxify.ngReduxService.state[entity.name].get('transactions').size }}</clr-stack-content>
-            <clr-stack-block *ngFor="let element of ngFluxify.ngReduxService.state[entity.name].get('transactions')">
-              <clr-stack-label></clr-stack-label>
-              <clr-stack-content>{{ element[1] | json }}</clr-stack-content>
+              <clr-stack-content>{{ element.sanitized | json }}</clr-stack-content>
             </clr-stack-block>
           </clr-stack-block>
         </clr-stack-block>
