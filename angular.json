@@ -135,7 +135,7 @@
         }
       }
     },
-    "ngFluxify": {
+    "ng-fluxify": {
       "root": "projects/ngFluxify",
       "sourceRoot": "projects/ngFluxify/src",
       "projectType": "library",
@@ -149,9 +149,9 @@
           },
           "configurations": {
             "production": {
-              "project": "projects/ngFluxify/ng-package.prod.json"
-            ,              "tsConfig": "projects/ngFluxify/tsconfig.lib.prod.json"
-}
+              "project": "projects/ngFluxify/ng-package.prod.json",
+              "tsConfig": "projects/ngFluxify/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
