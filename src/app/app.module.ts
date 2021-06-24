@@ -20,10 +20,11 @@ import {AppComponent} from './app.component';
     CommonModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot([
-      {path: '', loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)}
-    ]),
-    NgFluxifyModule.initialize({enableDynamicStateMutability: true}),
+    RouterModule.forRoot(
+      [{path: '', loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)}],
+      {relativeLinkResolution: 'legacy'}
+    ),
+    NgFluxifyModule.initialize({enableDynamicStateMutability: true, enableStoreLogger: true}),
     ClarityModule,
     BrowserAnimationsModule
   ],
